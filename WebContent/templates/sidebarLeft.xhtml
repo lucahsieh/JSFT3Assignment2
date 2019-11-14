@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:corejsf="http://corejsf.com/facelets">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition>
+		<h:form>
+			<h3>Hi, #{currentUser.employee.name}</h3>
+			<h:commandLink value="View Timesheets" action="timesheets" />
+			<br />
+			
+			<!-- <h:commandLink value="Current Timesheet" action="#{timesheetDB.moveToCurrentTimesheet(employeeDB.currentEmployee)}" />
+			<br />
+			<h:commandLink value="Change PassWord" action="changePW" />
+			<br />
+			<h:commandLink value="Log out" action="#{employeeDB.logout(employeeDB.currentEmployee)}" />
+			<br />
+			<h:commandLink value="View Users" action="viewUsers" rendered="#{employeeDB.isAdministrator()}"/>
+			<br />
+			<h:commandLink value="Edit Users" action="editUsers" rendered="#{employeeDB.isAdministrator()}"/>
+			<br /> -->
+			<br />
+			
+			<!-- <h:commandLink value="view" action="list.xhtml" /> -->
+		</h:form>
+	</ui:composition>
+</body>
+</html>

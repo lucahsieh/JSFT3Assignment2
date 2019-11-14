@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition template="/templates/masterLayout.xhtml">
+		<ui:define name="windowTitle">
+            Hi, #{currentUser.employee.userName}.
+         </ui:define>
+
+		<ui:define name="content">
+		
+		
+			<h:form>
+				<h4>Your Timesheets</h4>
+				
+				
+				<h:dataTable
+					value="#{timesheetListForm.list}" var="ts">
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Employee Name" style="font-weight: bold" />
+						</f:facet>
+						<h:outputText value="#{ts.employee.name}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Week Number" style="font-weight: bold" />
+						</f:facet>
+						<h:outputText value="#{ts.weekNumber}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="End Date" style="font-weight: bold" />
+						</f:facet>
+						<h:outputText value="#{ts.endWeek}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText>
+					</h:column>
+
+					<h:column>
+<!-- 						<h:commandLink value="View" action="" />
+ -->					</h:column>
+				</h:dataTable>
+				
+				
+				
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
