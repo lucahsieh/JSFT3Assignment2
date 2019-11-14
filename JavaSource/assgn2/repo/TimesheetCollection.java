@@ -1,9 +1,10 @@
-package ca.bcit.infosys.timesheet;
+package assgn2.repo;
 
 import java.io.Serializable;
 import java.util.List;
 
-import ca.bcit.infosys.employee.Employee;
+import assgn2.model.Employee;
+import assgn2.model.Timesheet;
 
 /**
  * A interface for accessing all existing Timesheets.

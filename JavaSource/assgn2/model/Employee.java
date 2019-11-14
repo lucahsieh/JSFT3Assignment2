@@ -1,4 +1,4 @@
-package ca.bcit.infosys.employee;
+package assgn2.model;
 
 import java.io.Serializable;
 

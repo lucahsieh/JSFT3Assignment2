@@ -1,4 +1,4 @@
-package ca.bcit.infosys.timesheet;
+package assgn2.model;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package ca.bcit.infosys.timesheet;
+package assgn2.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,8 +10,6 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-
-import ca.bcit.infosys.employee.Employee;
 
 /**
  * A class representing a single Timesheet.

@@ -1,8 +1,11 @@
-package ca.bcit.infosys.employee;
+package assgn2.repo;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import assgn2.model.Credentials;
+import assgn2.model.Employee;
 
 /**
  * interface to back end to access Employees and verify login credentials.
