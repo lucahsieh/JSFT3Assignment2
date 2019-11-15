@@ -48,7 +48,7 @@ public class CurrentUser implements Serializable{
         boolean result = employeeManager.verifyUser(credential);
         if(result) {
             employee = employeeManager.getCurrentEmployee(credential.getUserName());
-            return "timesheets"; //next page
+            return "timesheetList"; //next page
         }else {
             employee = null;
         }

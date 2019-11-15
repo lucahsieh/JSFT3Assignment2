@@ -1,0 +1,172 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition template="/templates/masterLayout.xhtml">
+		<ui:define name="windowTitle">
+            #{employeeDB.currentEmployee.name} Timesheet ViewUsers
+         </ui:define>
+
+
+
+		<ui:define name="content">
+			<table>
+				<tr>
+					<td>E Number:</td>
+					<td><h:outputText
+							value="#{currentUser.employee.empNumber}"></h:outputText></td>
+					<td>Week Number:</td>
+					<td><h:outputText
+							value="#{timesheetForm.weekNumber}"></h:outputText></td>
+					<td>Week Ending:</td>
+					<td><h:outputText
+							value="#{timesheetForm.endWeek}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:outputText></td>
+				</tr>
+				<tr>
+					<td>Name:</td>
+					<td><h:outputText value="#{currentUser.employee.name}"></h:outputText></td>
+				</tr>
+			</table>
+
+
+			<h:form>
+				<h4>View Details</h4>
+				<h:dataTable value="#{timesheetForm.rows}" var="tsRow">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="edit" style="font-weight: bold" />
+						</f:facet>
+						<h:selectBooleanCheckbox value="#{tsRow.editable}" onclick="submit()" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Project" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.projectID}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.projectID}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="Total" />
+						</f:facet>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="WP" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.workPackage}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.workPackage}" rendered="#{not p.editable}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Total" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.rowTotal}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.rowTotal}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.total}" />
+						</f:facet>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Sat" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.hoursForWeek[0]}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.hoursForWeek[0]}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.totalForWeek[0]}" />
+						</f:facet>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Sun" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.hoursForWeek[1]}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.hoursForWeek[1]}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.totalForWeek[1]}" />
+						</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Mon" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.hoursForWeek[2]}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.hoursForWeek[2]}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.totalForWeek[2]}" />
+						</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Tue" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.hoursForWeek[3]}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.hoursForWeek[3]}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.totalForWeek[3]}" />
+						</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Wed" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.hoursForWeek[4]}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.hoursForWeek[4]}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.totalForWeek[4]}" />
+						</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Thu" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.hoursForWeek[5]}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.hoursForWeek[5]}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.totalForWeek[5]}" />
+						</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Fri" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.hoursForWeek[6]}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.hoursForWeek[6]}" rendered="#{not p.editable}" />
+						<f:facet name="footer">
+							<h:outputText value="#{timesheetForm.totalForWeek[6]}" />
+						</f:facet>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Notes" style="font-weight: bold" />
+						</f:facet>
+						<h:inputText value="#{tsRow.row.notes}" rendered="#{p.editable}" />
+						<h:outputText value="#{tsRow.row.notes}" rendered="#{not p.editable}" />
+					</h:column>
+
+				</h:dataTable>
+				<h:commandButton value="Save" action="#{timesheetForm.save}"/>
+				<h:commandButton value="Back" action="#{timesheetForm.back}"/>
+
+			</h:form>
+			<ui:debug/>
+			
+		</ui:define>
+
+	</ui:composition>
+</body>
+</html>
