@@ -29,9 +29,10 @@ public class TimesheetListForm implements Serializable{
     }
 
     public List<Timesheet> getList() {
-        if(list == null) {
-            refreshList();
-        }
+//        if(list == null) {
+//            refreshList();
+//        }
+        refreshList();
         return list;
     }
 
@@ -49,7 +50,7 @@ public class TimesheetListForm implements Serializable{
     
     public String view(Timesheet ts) {
         selected = ts;
-//        conversation.begin();
+        conversation.begin();
         return "timesheet";
     }
 

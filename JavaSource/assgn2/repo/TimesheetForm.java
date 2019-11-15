@@ -18,20 +18,27 @@ import assgn2.model.Timesheet;
 import assgn2.model.TimesheetRow;
 
 @Named
-@SessionScoped
+@ConversationScoped
 public class TimesheetForm implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Inject private TimesheetManager timesheetManager;
-    @Inject private TimesheetListForm list;
+//    @Inject private TimesheetListForm list;
     @Inject private Conversation conversation;
+    
+    private Timesheet timesheet;
         
     private List<EditableTimesheetRow> rows;
     private BigDecimal total;
     private BigDecimal[] totalForWeek;
     
+    public TimesheetForm() {
+        this.total = this.total;
+
+    }
+    
     public void refreshRows() {
-        List<TimesheetRow> dbRows = list.getSelected().getDetails();
+        List<TimesheetRow> dbRows = timesheet.getDetails();
         rows = new ArrayList<EditableTimesheetRow>();
         for(int i = 0; i < dbRows.size(); i++) {
             rows.add(new EditableTimesheetRow(dbRows.get(i)));
@@ -54,19 +61,20 @@ public class TimesheetForm implements Serializable{
     }
 
     public BigDecimal getOvertime() {
-        return list.getSelected().getOvertime();
+        return timesheet.getOvertime();
     }
 
     public BigDecimal getFlextime() {
-        return list.getSelected().getFlextime();
+        return timesheet.getFlextime();
     }
     
       public Date getEndWeek() {
-          return list.getSelected().getEndWeek();
+          return timesheet.getEndWeek();
       }
 
     public List<EditableTimesheetRow> getRows() {
-        refreshRows();
+        if(rows == null)
+            refreshRows();
         return rows;
     }
 
@@ -93,9 +101,17 @@ public class TimesheetForm implements Serializable{
     }
     
     public int getWeekNumber() {
-        return list.getSelected().getWeekNumber();
+        return timesheet.getWeekNumber();
     }
     
+    public Timesheet getTimesheet() {
+        return timesheet;
+    }
+
+    public void setTimesheet(Timesheet timesheet) {
+        this.timesheet = timesheet;
+    }
+
     public String save() {
         for (EditableTimesheetRow er : rows) {
             if (er.isEditable()) {
@@ -103,13 +119,23 @@ public class TimesheetForm implements Serializable{
                 er.setEditable(false);
             }
         }
-//        conversation.end();
+        conversation.end();
         return "timesheetList";
     }
     
     public String back() {
-//        conversation.end();
+//        refreshRows();
+        conversation.end();
         return "timesheetList";
+    }
+    
+    public String view(Timesheet ts) {
+        timesheet = ts;
+        if(!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+        return "timesheet";
     }
     
 
