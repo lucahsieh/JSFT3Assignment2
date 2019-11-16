@@ -11,9 +11,10 @@
 	<ui:composition>
 		<h:form>
 			<h3>Hi, #{currentUser.employee.name}</h3>
-			<h:commandLink value="View Timesheets" action="timesheetList" />
+			<h:commandLink value="View Timesheets" action="timesheets" />
 			<br />
-			
+			<h:commandLink value="Current Timesheet" action="currentTimesheet" />
+			<br />
 			<!-- <h:commandLink value="Current Timesheet" action="#{timesheetDB.moveToCurrentTimesheet(employeeDB.currentEmployee)}" />
 			<br />
 			<h:commandLink value="Change PassWord" action="changePW" />

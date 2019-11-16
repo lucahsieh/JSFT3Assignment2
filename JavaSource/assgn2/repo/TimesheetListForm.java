@@ -27,6 +27,12 @@ public class TimesheetListForm implements Serializable{
     private void refreshList() {
         list = timesheetManager.getTimesheets(user.getEmployee());
     }
+    
+private String peterName;
+    
+    public String getPeterName() {
+        return "peter";
+    }
 
     public List<Timesheet> getList() {
 //        if(list == null) {

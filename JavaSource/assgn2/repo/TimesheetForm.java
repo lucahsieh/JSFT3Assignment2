@@ -23,6 +23,7 @@ public class TimesheetForm implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Inject private TimesheetManager timesheetManager;
+    @Inject private CurrentUser user;
 //    @Inject private TimesheetListForm list;
     @Inject private Conversation conversation;
     
@@ -136,6 +137,10 @@ public class TimesheetForm implements Serializable{
         }
         conversation.begin();
         return "timesheet";
+    }
+    public String currentTimesheet() {
+        Timesheet currentTS = timesheetManager.getCurrentTimesheet(user);
+        return "currentTimesheet";
     }
     
 

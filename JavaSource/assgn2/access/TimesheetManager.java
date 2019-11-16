@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -124,8 +126,46 @@ public class TimesheetManager implements TimesheetCollection, Serializable{
 
     @Override
     public Timesheet getCurrentTimesheet(Employee e) {
-        // TODO Auto-generated method stub
-        return null;
+        Connection connection = null;
+        Statement stmt = null;
+        
+        Calendar c = new GregorianCalendar();
+        int currentDay = c.get(Calendar.DAY_OF_WEEK);
+        int leftDays = Calendar.FRIDAY - currentDay;
+        c.add(Calendar.DATE, leftDays);
+        Date endWeek = c.getTime();
+
+        try {
+            try {
+                connection = ds.getConnection();
+                try {
+                    stmt = connection.createStatement();
+                    ResultSet result = stmt.executeQuery(
+                            "SELECT * FROM Timesheets where EmpNumber = '"
+                                    + e.getEmpNumber() + "' EndWeek = '" + endWeek + "'");
+                    if (result.next()) {
+                        return new Timesheet( 
+                                    e,
+                                    endWeek,
+                                    getTimesheetRows(e.getEmpNumber(),endWeek)
+                                );
+                    }else
+                        return null;
+                } finally {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                }
+            } finally {
+                if (connection != null) {
+                    connection.close();
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error in getTimesheets " + e);
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     @Override
