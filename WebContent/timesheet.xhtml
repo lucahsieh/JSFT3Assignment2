@@ -26,39 +26,30 @@
 							value="#{currentUser.employee.empNumber}"></h:outputText></td>
 					<td>Week Number:</td>
 					<td><h:outputText
-							value="#{timesheetForm.weekNumber}"></h:outputText></td>
+							value="#{timesheetForm.timesheet.weekNumber}"></h:outputText></td>
 					<td>Week Ending:</td>
 					<td><h:outputText
-							value="#{timesheetForm.endWeek}">
+							value="#{timesheetForm.timesheet.endWeek}">
 							<f:convertDateTime pattern="dd-MM-yyyy" />
 						</h:outputText></td>
 				</tr>
 				<tr>
 					<td>Name:</td>
-					<td><h:outputText value="#{currentUser.employee.name}"></h:outputText></td>
+					<td><h:outputText value="#{timesheetForm.timesheet.employee.name}"></h:outputText></td>
 				</tr>
 			</table>
 
 
 			<h:form>
 				<h4>View Details</h4>
-				<h:dataTable value="#{timesheetForm.rows}" var="tsRow">
-				
-				<!-- Editable checkbox -->
-				<!-- 	<h:column>
-						<f:facet name="header">
-							<h:outputText value="edit" style="font-weight: bold" />
-						</f:facet>
-						<h:selectBooleanCheckbox value="#{tsRow.editable}" onclick="submit()" /> 
-					</h:column>
-				-->
+				<h:dataTable value="#{timesheetForm.timesheet.details}" var="tsRow">
 
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Project" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.projectID}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.projectID}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.projectID}" rendered="false" />
+						<h:outputText value="#{tsRow.projectID}" rendered="true"  />
 						<f:facet name="footer">
 							<h:outputText value="Total" />
 						</f:facet>
@@ -68,18 +59,17 @@
 						<f:facet name="header">
 							<h:outputText value="WP" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.workPackage}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.workPackage}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.workPackage}" rendered="false" />
+						<h:outputText value="#{tsRow.workPackage}" rendered="true"  />
 					</h:column>
 					
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Total" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.rowTotal}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.rowTotal}" rendered="#{not tsRow.editable}" />
+						<h:outputText value="#{tsRow.sum}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.total}" />
+							<h:outputText value="#{timesheetForm.timesheet.totalHours}" />
 						</f:facet>
 					</h:column>
 
@@ -87,10 +77,10 @@
 						<f:facet name="header">
 							<h:outputText value="Sat" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.hoursForWeek[0]}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.hoursForWeek[0]}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.hoursForWeek[0]}" rendered="false" />
+						<h:outputText value="#{tsRow.hoursForWeek[0]}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.totalForWeek[0]}" />
+							<h:outputText value="#{timesheetForm.timesheet.dailyHours[0]}" />
 						</f:facet>
 					</h:column>
 
@@ -98,60 +88,60 @@
 						<f:facet name="header">
 							<h:outputText value="Sun" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.hoursForWeek[1]}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.hoursForWeek[1]}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.hoursForWeek[1]}" rendered="false" />
+						<h:outputText value="#{tsRow.hoursForWeek[1]}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.totalForWeek[1]}" />
+							<h:outputText value="#{timesheetForm.timesheet.dailyHours[1]}" />
 						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Mon" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.hoursForWeek[2]}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.hoursForWeek[2]}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.hoursForWeek[2]}" rendered="false" />
+						<h:outputText value="#{tsRow.hoursForWeek[2]}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.totalForWeek[2]}" />
+							<h:outputText value="#{timesheetForm.timesheet.dailyHours[2]}" />
 						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Tue" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.hoursForWeek[3]}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.hoursForWeek[3]}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.hoursForWeek[3]}" rendered="false" />
+						<h:outputText value="#{tsRow.hoursForWeek[3]}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.totalForWeek[3]}" />
+							<h:outputText value="#{timesheetForm.timesheet.dailyHours[3]}" />
 						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Wed" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.hoursForWeek[4]}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.hoursForWeek[4]}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.hoursForWeek[4]}" rendered="false" />
+						<h:outputText value="#{tsRow.hoursForWeek[4]}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.totalForWeek[4]}" />
+							<h:outputText value="#{timesheetForm.timesheet.dailyHours[4]}" />
 						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Thu" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.hoursForWeek[5]}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.hoursForWeek[5]}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.hoursForWeek[5]}" rendered="false" />
+						<h:outputText value="#{tsRow.hoursForWeek[5]}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.totalForWeek[5]}" />
+							<h:outputText value="#{timesheetForm.timesheet.dailyHours[5]}" />
 						</f:facet>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="Fri" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.hoursForWeek[6]}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.hoursForWeek[6]}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.hoursForWeek[6]}" rendered="false" />
+						<h:outputText value="#{tsRow.hoursForWeek[6]}" rendered="true"  />
 						<f:facet name="footer">
-							<h:outputText value="#{timesheetForm.totalForWeek[6]}" />
+							<h:outputText value="#{timesheetForm.timesheet.dailyHours[6]}" />
 						</f:facet>
 					</h:column>
 
@@ -159,12 +149,11 @@
 						<f:facet name="header">
 							<h:outputText value="Notes" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.row.notes}" rendered="#{tsRow.editable}" />
-						<h:outputText value="#{tsRow.row.notes}" rendered="#{not tsRow.editable}" />
+						<h:inputText value="#{tsRow.notes}" rendered="false" />
+						<h:outputText value="#{tsRow.notes}" rendered="true"  />
 					</h:column>
 
 				</h:dataTable>
-				<h:commandButton value="Save" action="#{timesheetForm.save}"/>
 				<h:commandButton value="Back" action="#{timesheetForm.back}"/>
 
 			</h:form>

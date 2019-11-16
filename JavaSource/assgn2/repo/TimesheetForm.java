@@ -24,87 +24,10 @@ public class TimesheetForm implements Serializable{
     
     @Inject private TimesheetManager timesheetManager;
     @Inject private CurrentUser user;
-//    @Inject private TimesheetListForm list;
     @Inject private Conversation conversation;
     
     private Timesheet timesheet;
-        
-    private List<EditableTimesheetRow> rows;
-    private BigDecimal total;
-    private BigDecimal[] totalForWeek;
-    
-    public TimesheetForm() {
-        this.total = this.total;
 
-    }
-    
-    public void refreshRows() {
-        List<TimesheetRow> dbRows = timesheet.getDetails();
-        rows = new ArrayList<EditableTimesheetRow>();
-        for(int i = 0; i < dbRows.size(); i++) {
-            rows.add(new EditableTimesheetRow(dbRows.get(i)));
-        }
-    }
-    
-    private void refreshColumnTotal() {
-        total = new BigDecimal(0);
-        totalForWeek = new BigDecimal[7];
-        for(int i = 0 ; i < totalForWeek.length; i++) {
-            totalForWeek[i] = new BigDecimal(0);
-        }
-        for(EditableTimesheetRow eRow: rows) {
-            total = total.add(eRow.getRowTotal());
-            for(int i = 0; i < 7 ; i ++) {
-                BigDecimal hr = eRow.getRow().getHour(i);
-                totalForWeek[i] = totalForWeek[i].add(hr);
-            }
-        }
-    }
-
-    public BigDecimal getOvertime() {
-        return timesheet.getOvertime();
-    }
-
-    public BigDecimal getFlextime() {
-        return timesheet.getFlextime();
-    }
-    
-      public Date getEndWeek() {
-          return timesheet.getEndWeek();
-      }
-
-    public List<EditableTimesheetRow> getRows() {
-        if(rows == null)
-            refreshRows();
-        return rows;
-    }
-
-    public void setRows(List<EditableTimesheetRow> rows) {
-        this.rows = rows;
-    }
-
-    public BigDecimal getTotal() {
-        refreshColumnTotal();
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public BigDecimal[] getTotalForWeek() {
-        refreshColumnTotal();
-        return totalForWeek;
-    }
-
-    public void setTotalForWeek(BigDecimal[] totalForWeek) {
-        this.totalForWeek = totalForWeek;
-    }
-    
-    public int getWeekNumber() {
-        return timesheet.getWeekNumber();
-    }
-    
     public Timesheet getTimesheet() {
         return timesheet;
     }
@@ -114,20 +37,27 @@ public class TimesheetForm implements Serializable{
     }
 
     public String save() {
-        for (EditableTimesheetRow er : rows) {
-            if (er.isEditable()) {
-//                productManager.merge(e.getProduct());
-                er.setEditable(false);
-            }
+        timesheetManager.removeTimesheetAllRows(timesheet);
+
+        // check row entry
+        for(TimesheetRow row : timesheet.getDetails()) {
+            List<String> added = new ArrayList<String>();
+            // check and insert single row.
+            if(row.getWorkPackage() == null || row.getWorkPackage().isEmpty())
+                continue;
+            if(added.contains(row.getWorkPackage()+row.getProjectID()))
+                continue;
+            timesheetManager.addTimesheetAllRows(timesheet, row);
+            added.add(row.getWorkPackage()+row.getProjectID());
         }
+        
         conversation.end();
-        return "timesheetList";
+        return "timesheets";
     }
     
     public String back() {
-//        refreshRows();
         conversation.end();
-        return "timesheetList";
+        return "timesheets";
     }
     
     public String view(Timesheet ts) {
@@ -138,10 +68,24 @@ public class TimesheetForm implements Serializable{
         conversation.begin();
         return "timesheet";
     }
-    public String currentTimesheet() {
-        Timesheet currentTS = timesheetManager.getCurrentTimesheet(user);
+    public String viewCurrentTimesheet() {
+        if(!conversation.isTransient()) {
+            conversation.end();
+        }
+        conversation.begin();
+        
+        timesheet = timesheetManager.getCurrentTimesheet(user.getEmployee());
+        // if current week Time sheet isn't in DB,
+        // Insert new empty Time sheet to DB and get currentTimesheet again.
+        if(timesheet == null) {
+            timesheetManager.addTimesheet();
+            timesheet = timesheetManager.getCurrentTimesheet(user.getEmployee());
+        }
+        for(int i = timesheet.getDetails().size(); i < 5 ; i++)
+                timesheet.addRow();
         return "currentTimesheet";
     }
+    
     
 
  
