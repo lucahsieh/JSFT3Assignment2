@@ -48,8 +48,11 @@
 						<f:facet name="header">
 							<h:outputText value="Project" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.projectID}" rendered="true" />
-						<h:outputText value="#{tsRow.projectID}" rendered="false"  />
+						
+						<h:inputText value="#{tsRow.projectID}" rendered="true" id="projectID" required="true" size="4" >
+								<f:convertNumber integerOnly="true" />
+						</h:inputText> 
+						
 						<f:facet name="footer">
 							<h:outputText value="Total" />
 						</f:facet>
@@ -59,7 +62,11 @@
 						<f:facet name="header">
 							<h:outputText value="WP" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.workPackage}" rendered="true" />
+						<h:inputText value="#{tsRow.workPackage}" id="WP" required="true" >
+						</h:inputText> 
+						<h:message for="WP" styleClass="errorMessage"  showSummary="false" showDetail="true"/>
+						
+						
 						<h:outputText value="#{tsRow.workPackage}" rendered="false"  />
 					</h:column>
 					
@@ -77,8 +84,11 @@
 						<f:facet name="header">
 							<h:outputText value="Sat" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.hoursForWeek[0]}" rendered="true" size="4"/>
-						<h:outputText value="#{tsRow.hoursForWeek[0]}" rendered="false"  />
+						<h:inputText value="#{tsRow.hoursForWeek[0]}" id="hours0" size="4" >
+								<f:validateLongRange minimum="0" maximum="24" />
+						</h:inputText> 
+						<h:message for="hours0" styleClass="errorMessage" />
+						
 						<f:facet name="footer">
 							<h:outputText value="#{timesheetForm.timesheet.dailyHours[0]}" />
 						</f:facet>
@@ -88,8 +98,11 @@
 						<f:facet name="header">
 							<h:outputText value="Sun" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.hoursForWeek[1]}" rendered="true" size="4"/>
-						<h:outputText value="#{tsRow.hoursForWeek[1]}" rendered="false"  />
+						<h:inputText value="#{tsRow.hoursForWeek[1]}" rendered="true" id="hours1" size="4" >
+								<f:validateLongRange minimum="0" maximum="24" />
+						</h:inputText> 
+						<h:message for="hours1" styleClass="errorMessage" />
+						
 						<f:facet name="footer">
 							<h:outputText value="#{timesheetForm.timesheet.dailyHours[1]}" />
 						</f:facet>
@@ -98,8 +111,11 @@
 						<f:facet name="header">
 							<h:outputText value="Mon" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.hoursForWeek[2]}" rendered="true" size="4" />
-						<h:outputText value="#{tsRow.hoursForWeek[2]}" rendered="false"  />
+						<h:inputText value="#{tsRow.hoursForWeek[2]}" rendered="true" id="hours2" size="4" >
+								<f:validateLongRange minimum="0" maximum="24" />
+						</h:inputText> 
+						<h:message for="hours2" styleClass="errorMessage" />
+						
 						<f:facet name="footer">
 							<h:outputText value="#{timesheetForm.timesheet.dailyHours[2]}" />
 						</f:facet>
@@ -108,8 +124,11 @@
 						<f:facet name="header">
 							<h:outputText value="Tue" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.hoursForWeek[3]}" rendered="true" size="4" />
-						<h:outputText value="#{tsRow.hoursForWeek[3]}" rendered="false"  />
+						<h:inputText value="#{tsRow.hoursForWeek[3]}" rendered="true" id="hours3" size="4" >
+								<f:validateLongRange minimum="0" maximum="24" />
+						</h:inputText> 
+						<h:message for="hours3" styleClass="errorMessage" />
+						
 						<f:facet name="footer">
 							<h:outputText value="#{timesheetForm.timesheet.dailyHours[3]}" />
 						</f:facet>
@@ -118,8 +137,11 @@
 						<f:facet name="header">
 							<h:outputText value="Wed" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.hoursForWeek[4]}" rendered="true" size="4" />
-						<h:outputText value="#{tsRow.hoursForWeek[4]}" rendered="false"  />
+						<h:inputText value="#{tsRow.hoursForWeek[4]}" rendered="true" id="hours4" size="4" >
+								<f:validateLongRange minimum="0" maximum="24" />
+						</h:inputText> 
+						<h:message for="hours4" styleClass="errorMessage" />
+						
 						<f:facet name="footer">
 							<h:outputText value="#{timesheetForm.timesheet.dailyHours[4]}" />
 						</f:facet>
@@ -128,8 +150,11 @@
 						<f:facet name="header">
 							<h:outputText value="Thu" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.hoursForWeek[5]}" rendered="true" size="4" />
-						<h:outputText value="#{tsRow.hoursForWeek[5]}" rendered="false"  />
+						<h:inputText value="#{tsRow.hoursForWeek[5]}" rendered="true" id="hours5" size="4" >
+								<f:validateLongRange minimum="0" maximum="24" />
+						</h:inputText> 
+						<h:message for="hours5" styleClass="errorMessage" />
+						
 						<f:facet name="footer">
 							<h:outputText value="#{timesheetForm.timesheet.dailyHours[5]}" />
 						</f:facet>
@@ -138,8 +163,11 @@
 						<f:facet name="header">
 							<h:outputText value="Fri" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.hoursForWeek[6]}" rendered="true" size="4" />
-						<h:outputText value="#{tsRow.hoursForWeek[6]}" rendered="false"  />
+						<h:inputText value="#{tsRow.hoursForWeek[6]}" rendered="true" id="hours6" size="4" >
+								<f:validateLongRange minimum="0" maximum="24" />
+						</h:inputText> 
+						<h:message for="hours6" styleClass="errorMessage" />
+						
 						<f:facet name="footer">
 							<h:outputText value="#{timesheetForm.timesheet.dailyHours[6]}" />
 						</f:facet>
@@ -149,19 +177,23 @@
 						<f:facet name="header">
 							<h:outputText value="Notes" style="font-weight: bold" />
 						</f:facet>
-						<h:inputText value="#{tsRow.notes}" rendered="true" />
-						<h:outputText value="#{tsRow.notes}" rendered="false"  />
+						<h:inputText value="#{tsRow.notes}" rendered="true" id="notes">
+						</h:inputText> 
+						<h:message for="notes" styleClass="errorMessage" />
+						
 					</h:column>
 					
 					<h:column>
 						<h:commandLink value="Delete"
-							action="#{timesheetForm.timesheet.deleteRow(tsRow)}" />
+							action="#{timesheetForm.timesheet.deleteRow(tsRow)}"   immediate="true"  />
 					</h:column>
 
-				</h:dataTable>				
+				</h:dataTable>	
+				
+							
 				<h:commandButton value="Add Row" action="#{timesheetForm.timesheet.addRow}"/>
 				<h:commandButton value="Save" action="#{timesheetForm.save}"/>
-				<h:commandButton value="Back" action="#{timesheetForm.back}"/>
+				<h:commandButton value="Back" action="#{timesheetForm.back}"  immediate="true" />
 
 			</h:form>
 			<ui:debug/>

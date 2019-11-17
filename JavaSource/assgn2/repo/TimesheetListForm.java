@@ -1,6 +1,10 @@
 package assgn2.repo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.enterprise.context.Conversation;
@@ -54,10 +58,17 @@ private String peterName;
 //        this.selected = selected;
 //    }
     
-    public String view(Timesheet ts) {
-        selected = ts;
-        conversation.begin();
-        return "timesheet";
+
+    public boolean isCurrentTimesheet(Timesheet ts) {
+        Calendar c = new GregorianCalendar();
+        int currentDay = c.get(Calendar.DAY_OF_WEEK);
+        int leftDays = Calendar.FRIDAY - currentDay;
+        c.add(Calendar.DATE, leftDays);
+        Date endWeek = c.getTime();
+        Date TimesheetDate = ts.getEndWeek();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+//        String d1 = 
+        return formatter.format(endWeek).equals(formatter.format(TimesheetDate)) ;
     }
 
 }

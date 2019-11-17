@@ -71,6 +71,7 @@
    text-align: center;
    background: PowderBlue;
 }
-.hourColumn{
-	width:20px;
+.errorMessage {
+   color:red; 
+   font-size:10px;
 }

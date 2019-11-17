@@ -48,9 +48,14 @@
 					<h:column>
  						<h:commandLink value="View" action="#{timesheetForm.view(ts)}" />
  					</h:column>
+ 					
+ 					<h:column>
+ 						<h:commandLink value="Edit" action="#{timesheetForm.viewCurrentTimesheet}" rendered="#{timesheetListForm.isCurrentTimesheet(ts)}" />
+ 					</h:column>
+ 					
 				</h:dataTable>
 				
-				<h:commandButton value="Current" action="#{timesheetForm.viewCurrentTimesheet}"/>
+				<h:commandButton value="Add" action="#{timesheetForm.viewCurrentTimesheet}"/>
 				
 				
 				

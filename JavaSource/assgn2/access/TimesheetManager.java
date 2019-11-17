@@ -54,7 +54,7 @@ public class TimesheetManager implements TimesheetCollection, Serializable{
                     stmt = connection.createStatement();
                     ResultSet result = stmt.executeQuery(
                             "SELECT * FROM Timesheets where EmpNumber = '"
-                                    + e.getEmpNumber() + "'");
+                                    + e.getEmpNumber() + "' ORDER BY EndWeek DESC");
                     while (result.next()) {
                         Date endWeek = result.getDate("EndWeek");
                         timesheets.add(
